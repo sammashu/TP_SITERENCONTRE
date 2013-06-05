@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:icecore="http://www.icefaces.org/icefaces/core"
+	xmlns:ace="http://www.icefaces.org/icefaces/components"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:p="http://primefaces.org/ui">
+    
+    <h:body>
+	<ui:composition template="index.xhtml">
+<ui:define name="header">
+			<h:form>
+				<h:outputLabel binding="#{MembreLogin.welcomeLabel}" for="email"
+					value="#{MembreLogin.sessionName}" styleClass="welcome"></h:outputLabel>
+
+				<h:outputText binding="#{MembreLogin.countOnline}"
+					value="#{MembreLogin.count}" styleClass="welcome"></h:outputText>
+				<h:commandButton value="Other users online"
+					action="#{MembreLogin.redirectOnline}"></h:commandButton>
+						
+				<h:panelGroup styleClass="dock">
+					<p:tabMenu activeIndex="0">
+						<p:menuitem value="Home" url="/recherche.jsf" />
+						<p:menuitem value="Search" url="/recherche.jsf" />
+						<p:menuitem value="My profile" url="/member.jsf" />
+						<p:menuitem value="Favorites" url="/favorites.jsf" />
+						<p:menuitem value="Admin" url="/admin.jsf"
+							rendered="#{MembreLogin.isAdmin}"></p:menuitem>
+						<p:menuitem url="/index.jsf">
+							<h:commandLink action="#{MembreLogin.logOut}" value="Logout"></h:commandLink>
+						</p:menuitem>
+
+
+					</p:tabMenu>
+
+				</h:panelGroup>
+
+			</h:form>
+
+		</ui:define>
+
+		<ui:define name="content">
+		<h2>Admin Options</h2>
+       		<h:form>
+       		<table>
+	       		<tr>
+	       			<td>
+		       	   		<ice:outputLabel><b>User: </b></ice:outputLabel>
+				   		<ice:selectOneMenu  partialSubmit="true" valueChangeListener="#{mbAdminBeans.ChangeSelectedName}"> 
+							<f:selectItems value="#{mbAdminBeans._usernames}"></f:selectItems>
+						</ice:selectOneMenu>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<hr />
+						<ice:outputLabel><b>Member ID: </b></ice:outputLabel>
+						<ice:outputLabel value="#{mbAdminBeans._selectedMembre.membreId}"></ice:outputLabel>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<ice:outputLabel><b>First name: </b></ice:outputLabel>
+						<ice:outputLabel value="#{mbAdminBeans._selectedMembre.prenom}"></ice:outputLabel>
+					</td>	
+				</tr>
+				<tr>
+					<td>
+						<ice:outputLabel><b> Last name: </b></ice:outputLabel>
+						<ice:outputLabel value="#{mbAdminBeans._selectedMembre.nom}"></ice:outputLabel>
+					</td>	
+				</tr>
+				<tr>
+					<td>
+						<ice:outputLabel><b>Age: </b></ice:outputLabel>
+						<ice:outputLabel value="#{mbAdminBeans._selectedMembre.age}"></ice:outputLabel>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<ice:outputLabel><b>Description: </b></ice:outputLabel>
+						<ice:outputLabel value="#{mbAdminBeans._selectedMembre.description}"></ice:outputLabel>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<hr />
+						<ice:outputLabel><b>Options: </b></ice:outputLabel>
+						<ice:commandButton value="Delete User" action="#{mbAdminBeans.DeleteUser}"></ice:commandButton>
+					</td>
+				</tr>			
+				<tr>
+					<td>
+					<hr />
+						<ice:outputLabel><b>Send email: </b></ice:outputLabel>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<ice:inputTextarea cols="60"  rows="10" value="#{mbAdminBeans._message}" action="#{mbAdminBeans.SendEmailAll}"></ice:inputTextarea>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<ice:outputLabel><b>Send to: </b></ice:outputLabel>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<ice:commandButton value="#{mbAdminBeans._selectedMembre.email}" action="#{mbAdminBeans.SendEmailUser}"></ice:commandButton>
+						<ice:commandButton value="All users" action="#{mbAdminBeans.SendEmailAll}"></ice:commandButton>
+					</td>
+				</tr>
+				<ice:outputLabel></ice:outputLabel>
+			</table>
+	       	</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

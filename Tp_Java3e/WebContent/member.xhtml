@@ -1,0 +1,185 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:icecore="http://www.icefaces.org/icefaces/core"
+	xmlns:ace="http://www.icefaces.org/icefaces/components"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<ui:composition template="index.xhtml">
+		<ui:define name="header">
+			<h:form>
+				<h:outputLabel binding="#{MembreLogin.welcomeLabel}" for="email"
+					value="#{MembreLogin.sessionName}" styleClass="welcome"></h:outputLabel>
+
+				<h:outputText binding="#{MembreLogin.countOnline}"
+					value="#{MembreLogin.count}" styleClass="welcome"></h:outputText>
+				<h:commandButton value="Show users online"
+					action="#{MembreLogin.redirectOnline}"></h:commandButton>
+						
+				<h:panelGroup styleClass="dock">
+					<p:tabMenu activeIndex="0">
+						<p:menuitem value="Home" url="/recherche.jsf" />
+						<p:menuitem value="Search" url="/recherche.jsf" />
+						<p:menuitem value="My profile" url="/member.jsf" />
+						<p:menuitem value="Favorites" url="/favorites.jsf" />
+						<p:menuitem value="Admin" url="/admin.jsf"
+							rendered="#{MembreLogin.isAdmin}"></p:menuitem>
+						<p:menuitem url="/index.jsf">
+							<h:commandLink action="#{MembreLogin.logOut}" value="Logout"></h:commandLink>
+						</p:menuitem>
+
+
+					</p:tabMenu>
+
+				</h:panelGroup>
+
+			</h:form>
+
+		</ui:define>
+
+		<ui:define name="content">
+			<h:panelGroup id="panelCenter">
+
+
+				<h2 class="uDescription">Your winks</h2>
+				<ice:selectOneMenu styleClass="uDescription">
+					<f:selectItems value="#{mbClinsdoeil._clinsNom}"></f:selectItems>
+				</ice:selectOneMenu>
+
+				<h2 class="uDescription">Update your profile</h2>
+
+
+				<h:form styleClass="uDescription" enctype="multipart/form-data">
+					<p>
+						<h:outputLabel value="Last Name : "></h:outputLabel>
+						<ice:inputText value="#{UpdateUserInfos.nom}"></ice:inputText>
+					</p>
+
+					<p>
+						<h:outputLabel value="First Name : "></h:outputLabel>
+						<ice:inputText value="#{UpdateUserInfos.prenom}"></ice:inputText>
+					</p>
+
+					<p>
+						<h:outputLabel value="Age : "></h:outputLabel>
+						<ice:inputText value="#{UpdateUserInfos.age}"></ice:inputText>
+					</p>
+
+					<p>
+						<h:outputLabel value="Description"></h:outputLabel>
+						<h:inputTextarea value="#{UpdateUserInfos.description}" cols="40"
+							rows="10"></h:inputTextarea>
+					</p>
+
+					<p>
+						<h:outputLabel value="Looking Relation : "></h:outputLabel>
+						<ice:selectOneMenu value="#{UpdateUserInfos.categorieId}">
+							<f:selectItems value="#{CategorieBeans.listCatdesc}"></f:selectItems>
+						</ice:selectOneMenu>
+					</p>
+
+					<p>
+						<h:outputLabel value="Member Type : "></h:outputLabel>
+						<ice:selectOneMenu value="#{UpdateUserInfos.niveauMembreId}">
+							<f:selectItems value="#{NiveauBeans.listDesc}"></f:selectItems>
+						</ice:selectOneMenu>
+					</p>
+
+					<p>
+						<h:outputLabel value="Email : "></h:outputLabel>
+						<ice:inputText value="#{UpdateUserInfos.email}"></ice:inputText>
+					</p>
+
+					<p>
+						<h:outputLabel value="Password : "></h:outputLabel>
+						<ice:inputText value="#{UpdateUserInfos.password}"></ice:inputText>
+					</p>
+
+					<p>
+						<h:outputLabel value="Confirm password : "></h:outputLabel>
+						<ice:inputText value="#{UpdateUserInfos.confPassword}"></ice:inputText>
+					</p>
+
+					<p>
+						<h:outputLabel value="Pseudo : "></h:outputLabel>
+						<ice:inputText value="#{UpdateUserInfos.pseudo}"></ice:inputText>
+					</p>
+
+					<h:commandButton action="#{UpdateUserInfos.updateInfos}"
+						value="Update description"></h:commandButton>
+				</h:form>
+
+				<hr />
+				<h3 class="uDescription">Manage favorites</h3>
+				<h:outputText value="You don't have any favorite"
+					rendered="#{FavoriteBeans.toRenderLabelNoFav}"
+					styleClass="uDescription"></h:outputText>
+
+				<h:dataTable value="#{FavoriteBeans.membres}" var="favorits"
+					border="1" rendered="#{FavoriteBeans.toRenderTableFavorite}"
+					styleClass="uDescription">
+					<h:column>
+						<f:facet name="header">ID</f:facet>
+				#{favorits.membreId}
+			</h:column>
+					<h:column>
+						<f:facet name="header">Nom</f:facet>
+				#{favorits.nom}
+			</h:column>
+					<h:column>
+						<f:facet name="header">Prenom</f:facet>
+				#{favorits.prenom}
+			</h:column>
+					<h:column>
+						<f:facet name="header">Age</f:facet>
+				#{favorits.age}
+			</h:column>
+					<h:column>
+						<f:facet name="header">Description</f:facet>
+				#{favorits.description}
+			</h:column>
+					<h:column>
+						<f:facet name="header">Pseudo</f:facet>
+				#{favorits.pseudo}
+			</h:column>
+
+
+					<h:column>
+						<f:facet name="header">Remove</f:facet>
+						<h:form>
+							<h:inputHidden binding="#{FavoriteBeans.hiddenID}"
+								value="#{favorits.membreId}"></h:inputHidden>
+							<h:commandButton action="#{FavoriteBeans.deleteFavorite}"
+								value="Remove" type="submit"></h:commandButton>
+						</h:form>
+					</h:column>
+
+				</h:dataTable>
+				<h:form>
+					<h:commandButton action="#{FavoriteBeans.deleteAllFavorite}"
+						value="Remove all favorites" type="submit"
+						rendered="#{FavoriteBeans.toRenderTableFavorite}"></h:commandButton>
+				</h:form>
+
+				<hr />
+				<h3 class="uDescription">Update your picture</h3>
+			</h:panelGroup>
+			<h:form enctype="multipart/form-data">
+				<p:fileUpload fileUploadListener="#{UpdatePhoto.upload}"
+					allowTypes="/(\.|\/)(gif|jpeg|png|jpg)$/" sizeLimit="1000000000"
+					description="Select Images" />
+
+
+			</h:form>
+
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+</html>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Favoris">
+	<resultMap  id="resultMapFavori" class="model.entities.Favoris">
+		<result property="favorisID" column="favoris.favorisID"/>
+		<result property="dateAjout" column="favoris.dateAjout"/>
+		<result property="membreFavorisant" column="favoris.membreFavorisant"/>
+		<result property="membreFavorise" column="favoris.membreFavorise"/>
+	</resultMap>
+	
+	
+	<select id="getIDmembreFavoriseByIDFavorisant" resultClass="int" parameterClass="int">
+		SELECT membreFavorise
+		FROM favoris
+		WHERE membreFavorisant = #value#
+	</select>
+
+	<select id="getAllFavoritebyIDFavorisant" resultMap="resultMapFavori" parameterClass="int">
+		SELECT *
+		FROM favoris
+		WHERE membreFavorisant = #value#
+	
+	</select>
+	
+	<select id="getFavoritByFF" resultClass="String" parameterClass="java.util.Map">
+		SELECT dateAjout
+		FROM favoris
+		WHERE membreFavorisant = #membreFavorisant# AND membreFavorise = #membreFavorise# 
+	</select>
+	
+	<insert id="insertFavorite" parameterClass="model.entities.Favoris">
+		INSERT INTO
+		favoris(dateAjout, membreFavorisant, membreFavorise)
+		VALUE(#dateAjout#,#membreFavorisant#,#membreFavorise#)
+	</insert>
+	
+	<delete id="deletefavorisById" parameterClass="int">
+		DELETE FROM favoris
+		WHERE membreFavorise = #value#
+	</delete>
+	
+	<delete id="deleteALLfavorisById" parameterClass="int">
+		DELETE FROM favoris
+		WHERE membreFavorisant = #value#
+	</delete>
+</sqlMap>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Clindoeil">
+	<resultMap  id="resultMapMClindoeil" class="model.entities.Clindoeil" groupBy="clindoeilid">
+		<result property="clindoeilid" column="clinsdoeil.clindoeilid" />
+		<result property="from" column="clinsdoeil.from" />
+		<result property="to" column="clinsdoeil.to" />
+	</resultMap>
+	
+	<select id="getClinDoeilClient" parameterClass="int" resultMap="resultMapMClindoeil">
+		SELECT *
+		FROM clinsdoeil
+		WHERE clinsdoeil.to = #value#
+	</select>
+
+	<insert id="insertWink" parameterClass="model.entities.Clindoeil">
+		INSERT INTO 
+		clinsdoeil(clinsdoeil.from, clinsdoeil.to)
+		VALUE(#from#, #to#)
+	</insert>
+	
+</sqlMap>

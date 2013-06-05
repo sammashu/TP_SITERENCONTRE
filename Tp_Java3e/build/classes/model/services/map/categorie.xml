@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap>
+	<resultMap class="model.entities.Categorie" id="resMapCat">
+		<result property="categorieId" column="categorie.categorieId"/>
+		<result property="description" column="categorie.description"/>
+	</resultMap>
+	
+	<select id="getAllCat" resultMap="resMapCat">
+		SELECT *
+		FROM categorie
+	</select>
+	
+	<select id="getNoCatByCategory" resultClass="int" parameterClass="String">
+		select categorieId
+		from categorie
+		where description = #value#		
+	</select>
+</sqlMap>

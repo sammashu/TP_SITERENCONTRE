@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd"
+	version="2.1">
+
+	<managed-bean>
+		<managed-bean-name>MembreLogin</managed-bean-name>
+		<managed-bean-class>model.managerBeans.MembreLogin</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+
+	<managed-bean>
+		<managed-bean-name>CategorieBeans</managed-bean-name>
+		<managed-bean-class>model.managerBeans.CategorieBeans</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+
+	<managed-bean>
+		<managed-bean-name>NiveauBeans</managed-bean-name>
+		<managed-bean-class>model.managerBeans.NiveauBeans</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>UpdateUserInfos</managed-bean-name>
+		<managed-bean-class>model.managerBeans.UpdateUserInfos</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>UpdatePhoto</managed-bean-name>
+		<managed-bean-class>model.managerBeans.UpdatePhoto</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>FavoriteBeans</managed-bean-name>
+		<managed-bean-class>model.managerBeans.FavoriteBeans</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>SearchingBeans</managed-bean-name>
+		<managed-bean-class>model.managerBeans.SearchingBeans</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>mbAdminBeans</managed-bean-name>
+		<managed-bean-class>model.managerBeans.AdminBeans</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>mbClinsdoeil</managed-bean-name>
+		<managed-bean-class>model.managerBeans.ClinDoeilBeans</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	
+		<managed-bean>
+		<managed-bean-name>DetailBeans</managed-bean-name>
+		<managed-bean-class>model.managerBeans.DetailBeans</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>access</from-outcome>
+			<to-view-id>/member.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>deny</from-outcome>
+			<to-view-id>/index.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>out</from-outcome>
+			<to-view-id>/index.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/member.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>admin</from-outcome>
+			<to-view-id>/admin.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>done</from-outcome>
+			<to-view-id>/admin.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>add</from-outcome>
+			<to-view-id>/addUser.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>remove</from-outcome>
+			<to-view-id>/removeUser.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>modify</from-outcome>
+			<to-view-id>/modifyUser.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>delsuccess</from-outcome>
+			<to-view-id>/member.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>detail</from-outcome>
+			<to-view-id>/detailProfil.xhtml</to-view-id>
+		</navigation-case>	
+		<navigation-case>
+			<from-outcome>showOnline</from-outcome>
+			<to-view-id>/online.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<validator>
+		<validator-id>AllVal</validator-id>
+		<validator-class>validator.validatorValue</validator-class>
+	</validator>
+
+</faces-config>

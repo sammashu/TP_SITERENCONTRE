@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:icecore="http://www.icefaces.org/icefaces/core"
+        xmlns:ace="http://www.icefaces.org/icefaces/components"
+        xmlns:ice="http://www.icesoft.com/icefaces/component"
+        xmlns:p="http://primefaces.org/ui"
+    >
+
+<h:body>
+	<ui:composition template="index.xhtml">
+	<ui:define name="header">
+			<h:form>
+				<h:outputLabel binding="#{MembreLogin.welcomeLabel}" for="email"
+					value="#{MembreLogin.sessionName}" styleClass="welcome"></h:outputLabel>
+
+				<h:outputText binding="#{MembreLogin.countOnline}"
+					value="#{MembreLogin.count}" styleClass="welcome"></h:outputText>
+				<h:commandButton value="Show users online"
+					action="#{MembreLogin.redirectOnline}"></h:commandButton>
+						
+				<h:panelGroup styleClass="dock">
+					<p:tabMenu activeIndex="0">
+						<p:menuitem value="Home" url="/recherche.jsf" />
+						<p:menuitem value="Search" url="/recherche.jsf" />
+						<p:menuitem value="My profile" url="/member.jsf" />
+						<p:menuitem value="Favorites" url="/favorites.jsf" />
+						<p:menuitem value="Admin" url="/admin.jsf"
+							rendered="#{MembreLogin.isAdmin}"></p:menuitem>
+						<p:menuitem url="/index.jsf">
+							<h:commandLink action="#{MembreLogin.logOut}" value="Logout"></h:commandLink>
+						</p:menuitem>
+
+
+					</p:tabMenu>
+
+				</h:panelGroup>
+
+			</h:form>
+
+		</ui:define>
+	<ui:define name="content">
+	<h:panelGroup id="search">
+		<h:form style="padding:25px;">
+			<h:dataTable styleClass="listCat" value="#{SearchingBeans.list}" var="entry" style="margin:0 auto;">
+				<h:column>
+					<f:facet name="header">
+						<h:outputLabel>Photo</h:outputLabel>
+					</f:facet>
+					<ui:repeat value="#{entry.photos[0]}" var="photo">
+					<h:inputHidden binding="#{DetailBeans.hiddenId}"  value="#{entry.membreId}"></h:inputHidden>
+					<h:commandLink action="#{DetailBeans.checkDetail}"><h:graphicImage value="data:image/png;base64,#{photo.chemin}"></h:graphicImage></h:commandLink>
+					   
+					</ui:repeat>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputLabel>Pseudo</h:outputLabel>
+					</f:facet>
+					<h:outputText value="#{entry.pseudo}"></h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputLabel>Description</h:outputLabel>
+					</f:facet>
+					<h:outputText value="#{entry.description}"></h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputLabel>Favorite</h:outputLabel>
+				
+					</f:facet>
+					<h:inputHidden binding="#{SearchingBeans.hiddenId}"  value="#{entry.membreId}"></h:inputHidden>
+					<h:commandButton styleClass="button" action="#{SearchingBeans.insertFavorite}"></h:commandButton>
+				</h:column>				
+			</h:dataTable>
+		</h:form>
+	</h:panelGroup>
+	</ui:define>
+	</ui:composition>
+</h:body>
+</html>

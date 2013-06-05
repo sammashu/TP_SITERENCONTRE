@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Membre">
+	<resultMap id="resultMapMembre" class="model.entities.Membre" 
+		groupBy="membreId">
+		<result property="membreId" column="membre.membreId" />
+		<result property="nom" column="membre.nom" />
+		<result property="prenom" column="membre.prenom" />
+		<result property="age" column="membre.age" />
+		<result property="description" column="membre.description" />
+		<result property="categorieId" column="membre.categorieId" />
+		<result property="isOnline" column="membre.isOnline" />
+		<result property="niveauMembreId" column="membre.niveauMembreId" />
+		<result property="lastVisit" column="membre.lastVisit" />
+		<result property="email" column="membre.email" />
+		<result property="password" column="membre.password" />
+		<result property="pseudo" column="membre.pseudo" />
+		<result property="photos" column="membreId" select="getAllphotoById" />
+	</resultMap>
+
+	<resultMap class="model.entities.Photos" id="resultMapPhotos">
+		<result property="chemin" column="photos.chemin" />
+		<result property="membreId" column="photos.membreId" />
+		<result property="isprofil" column="photos.isprofil" />
+	</resultMap>
+
+	<select id="getAllphotoById" parameterClass="int" resultMap="resultMapPhotos">
+		SELECT *
+		FROM photos
+		WHERE membreId = #value#
+	</select>
+
+	<select id="getAllMembre" resultMap="resultMapMembre">
+		SELECT *
+		FROM membre
+	</select>
+
+	<select id="getMembreByNamePass" resultMap="resultMapMembre"
+		parameterClass="java.util.Map">
+		SELECT *
+		FROM membre
+		WHERE email= #email# AND password = #password#
+	</select>
+
+	<select id="getMembreByEmail" resultMap="resultMapMembre"
+		parameterClass="String">
+		SELECT *
+		FROM membre
+		WHERE email= #email#
+	</select>
+
+	<select id="getMembreByID" resultMap="resultMapMembre"
+		parameterClass="int">
+		SELECT *
+		FROM membre
+		WHERE membreId= #value#
+	</select>
+
+	<select id="getMembreIdByEmail" resultClass="int"
+		parameterClass="String">
+		SELECT membreId
+		FROM membre
+		WHERE email= #email#
+	</select>
+
+	<select id="getMembreByCategorie" parameterClass="int"
+		resultMap="resultMapMembre">
+		SELECT *
+		FROM membre INNER JOIN photos ON membre.membreId = photos.membreId
+		WHERE categorieId = #value#
+	</select>
+
+	<select id="getNoCatbyEmail" parameterClass="String"
+		resultClass="int">
+		SELECT categorieId
+		FROM membre
+		WHERE email = #value#
+	</select>
+	<select id="getCountIsOnline" resultClass="int">
+		select count(*)
+		from membre
+		where isOnline = 1
+	</select>
+	
+	<select id="getMembreOnLine" resultMap="resultMapMembre">
+		SELECT *
+		from membre
+		where isOnline = 1
+	</select>
+	
+	
+	<insert id="insertMembre" parameterClass="model.entities.Membre">
+		<selectKey keyProperty="membreId" type="post" resultClass="int">
+			SELECT LAST_INSERT_ID() AS value
+		</selectKey>
+		INSERT INTO
+		membre(nom, prenom, age, categorieId, niveauMembreId,
+		email, password, pseudo)
+		VALUE(#nom#,#prenom#,#age#,#categorieId#,#niveauMembreId#,#email#,#password#,#pseudo#)
+	</insert>
+
+	<update id="modifierMembre" parameterClass="java.util.Map">
+		update membre
+		set
+		nom=#nom#, prenom=#prenom#, age=#age#, description=#description#,
+		categorieId=#categorieId#, isOnline=#isOnline#, niveauMembreId=#niveauMembreId#,
+		email=#email#, password=#password#, pseudo=#pseudo#
+		where email=#email#
+	</update>
+	
+	<update id="updateOnline" parameterClass="string">
+		update membre
+		set isOnline = 1
+		where email = #value#
+	</update>
+	<update id="updateOffline" parameterClass="string">
+		update membre
+		set isOnline = 0
+		where email = #value#
+	</update>
+
+	<insert id="insertPhoto" parameterClass="model.entities.Photos">
+		INSERT INTO
+		photos(membreId, chemin)
+		VALUE(#membreId#, #chemin#)
+	</insert>
+
+	<insert id="deleteAllPhotos" parameterClass="model.entities.Membre">
+		DELETE FROM photos
+		WHERE membreId = #membreId#;
+	</insert>
+
+	<insert id="deleteMembre" parameterClass="model.entities.Membre">
+		DELETE FROM membre
+		WHERE membreId = #membreId#;
+	</insert>
+
+</sqlMap>

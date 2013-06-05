@@ -1,0 +1,170 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:icecore="http://www.icefaces.org/icefaces/core"
+	xmlns:ace="http://www.icefaces.org/icefaces/components"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Index</title>
+	<h:outputStylesheet library="css" name="style.css" target="head"></h:outputStylesheet>
+
+</h:head>
+<h:body>
+<ice:outputText value="#{mbAuthors._authors}"></ice:outputText>
+	<h:panelGroup id="wrap" layout="block">
+		<h:panelGroup id="wrapper" layout="block">
+			<ui:insert name="header">
+				<h:panelGroup id="header" layout="block">
+				<h1 style="float:left; font-size: 35px; color:white; font-family: Verdana">Seduction City</h1>
+					<h:form id="loginF">
+					<p:inputMask mask="#{UpdatePhoto.s}" rendered="false" value="#{UpdatePhoto.s}"></p:inputMask>
+						<table>
+							<tr>
+								<td><ice:outputLabel binding="#{MembreLogin.welcomeLabel}"
+										for="email" value="#{MembreLogin.sessionName}"></ice:outputLabel></td>
+								<td><ice:commandButton value="Log Out"
+										action="#{MembreLogin.logOut}"
+										rendered="#{MembreLogin.toRenderedLogOut}"></ice:commandButton></td>
+							</tr>
+							<tr>
+								<td><ice:outputLabel rendered="#{MembreLogin.toRendered}"
+										for="email" value="Email:">
+									</ice:outputLabel></td>
+								<td><ice:outputLabel rendered="#{MembreLogin.toRendered}"
+										for="password" value="Password:">
+									</ice:outputLabel></td>
+							</tr>
+							<tr>
+								<td><ice:inputText rendered="#{MembreLogin.toRendered}"
+										name="email" value="#{MembreLogin.email}">
+									</ice:inputText></td>
+								<td><ice:inputSecret rendered="#{MembreLogin.toRendered}"
+										name="password" value="#{MembreLogin.password}">
+									</ice:inputSecret></td>
+								<td><ice:commandButton rendered="#{MembreLogin.toRendered}"
+										value="Login" action="#{MembreLogin.logIN}">
+									</ice:commandButton></td>
+							</tr>
+						</table>
+					</h:form>
+				</h:panelGroup>
+			</ui:insert>
+			<h:panelGroup id="container" layout="block">
+				<ui:insert name="content">
+					<h:panelGroup id="container_left" layout="block">
+					</h:panelGroup>
+					<h:panelGroup id="container_right" layout="block">
+						<h2>Sign Up Today for FREE!</h2>
+						<h:form id="signUpF">
+							<table align="center">
+								<tr>
+									<td><ice:outputLabel for="sign_name" value="Name: "></ice:outputLabel></td>
+									<td><ice:inputText id="sign_name" name="sign_name" required="true"
+											value="#{MembreLogin.nom}"></ice:inputText></td>
+								</tr>
+								<tr>
+									<td colspan="2"><h:message for="sign_name" style="color:red; font-size:16px"></h:message></td>
+								</tr>
+								<tr>
+									<td><ice:outputLabel for="sign_firstname"
+											value="FirstName: "></ice:outputLabel></td>
+									<td><ice:inputText id="sign_firstname" name="sign_firstname" required="true"
+											value="#{MembreLogin.prenom}"></ice:inputText></td>
+								</tr>
+								<tr>
+									<td colspan="2"><h:message for="sign_firstname" style="color:red; font-size:16px"></h:message></td>
+								</tr>
+								<tr>
+									<td><ice:outputLabel for="sign_age" value="age: "></ice:outputLabel></td>
+									<td><h:inputText id="sign_age" name="sign_age"
+											required="true" value="#{MembreLogin.age}">
+											<f:validator validatorId="AllVal"></f:validator>
+										</h:inputText></td>
+								</tr>
+								<tr>
+									<td colspan="2"><h:message for="sign_age" style="color:red; font-size:16px"></h:message></td>
+								</tr>
+								<tr>
+									<td><ice:outputLabel for="sign_categorie"
+											value="Looking Relation: "></ice:outputLabel></td>
+									<td><ice:selectOneMenu
+											value="#{MembreLogin.selectRelation}">
+											<f:selectItems value="#{CategorieBeans.listCatdesc}"></f:selectItems>
+										</ice:selectOneMenu></td>
+								</tr>
+								<tr>
+									<td><ice:outputLabel for="sign_acc_type"
+											value="Member Type: "></ice:outputLabel></td>
+									<td><ice:selectOneMenu
+											value="#{MembreLogin.selectTypeMember}">
+											<f:selectItems value="#{NiveauBeans.listDesc}"></f:selectItems>
+										</ice:selectOneMenu></td>
+								</tr>
+								<tr>
+									<td><ice:outputLabel for="sign_email" value="Email: "></ice:outputLabel></td>
+									<td><ice:inputText id="sign_email" name="sign_email" required="true"
+											value="#{MembreLogin.signemail}">
+											<f:validator validatorId="AllVal"></f:validator>
+											</ice:inputText></td>
+								</tr>
+								<tr>
+									<td colspan="2"><h:message for="sign_email" style="color:red; font-size:16px"></h:message></td>
+								</tr>
+								<tr>
+									<td><ice:outputLabel for="sign_password"
+											value="Password: "></ice:outputLabel></td>
+									<td><h:inputSecret id="sign_password" name="sign_password" binding="#{passwordComponent}" required="true"
+											value="#{MembreLogin.signpassword}">
+											<f:validator validatorId="AllVal"></f:validator>
+											</h:inputSecret></td>
+								</tr>
+								<tr>
+									<td colspan="2"><h:message for="sign_password" style="color:red; font-size:16px"></h:message></td>
+								</tr>
+								<tr>
+									<td><ice:outputLabel for="sign_retype_password" 
+											value="Re-Type Password: "></ice:outputLabel></td>
+									<td><h:inputSecret id="sign_retype_password" name="sign_retype_password" required="true">
+									<f:validator validatorId="AllVal"></f:validator>
+									<f:attribute name="passwordComponent" value="#{passwordComponent}" />
+									</h:inputSecret></td>
+								</tr>
+								<tr>
+									<td colspan="2"><h:message for="sign_retype_password" style="color:red; font-size:16px"></h:message></td>
+								</tr>
+								<tr>
+									<td><ice:outputLabel for="sign_username"
+											value="Username: "></ice:outputLabel></td>
+									<td><h:inputText id="sign_username" name="sign_username"
+											value="#{MembreLogin.username}" required="true">
+											<f:validator validatorId="AllVal"></f:validator>
+											</h:inputText></td>
+								</tr>
+								<tr>
+									<td colspan="2"><h:message for="sign_username" style="color:red; font-size:16px"></h:message></td>
+								</tr>
+							</table>
+							<div style="padding-top: 7px;">
+								<ice:commandButton value="CONTINUE"
+									action="#{MembreLogin.inscriptionUser}"></ice:commandButton>
+							</div>
+						</h:form>
+					</h:panelGroup>
+				</ui:insert>
+			</h:panelGroup>
+			<ui:insert name="footer">
+			
+
+				<h:panelGroup id="footer" layout="block">
+					<p class="copyright">Copyright 2013 ©</p>
+				</h:panelGroup>
+
+			</ui:insert>
+		</h:panelGroup>
+	</h:panelGroup>
+</h:body>
+</html>

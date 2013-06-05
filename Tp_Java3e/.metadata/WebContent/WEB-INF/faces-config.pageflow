@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf13681900580110" configfile="/Tp_Java3e/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="946" id="pf13682311983390" outlinks="pf13682391843994 pf13683676311196 pf13687505707010 pf13687505707011 pf13687505707012 pf13687505707013 pf13687505707014 pf13688045295503 pf13688045295504 pf13690799832340 pf13691692331160 pf13692665726990" path="*"/>
+  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="338" y="178" id="pf13682391843995" referenceLink="//@navigationRule.0/@navigationCase.2/@toViewId|" inlinks="pf13682391843994 pf13683676311196" path="/index.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="membre.xhtml" x="338" y="562" id="pf13687075671481" referenceLink="//@navigationRule.0/@navigationCase.9/@toViewId|" inlinks="pf13688045295503 pf13688045295504 pf13690799832340" path="/member.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="admin.xhtml" x="338" y="946" id="pf13687505707015" referenceLink="//@navigationRule.0/@navigationCase.5/@toViewId|" inlinks="pf13687505707010 pf13687505707011" path="/admin.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="addUser.xhtml" x="338" y="1330" id="pf13687505707016" referenceLink="//@navigationRule.0/@navigationCase.6/@toViewId|" inlinks="pf13687505707012" path="/addUser.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="removeUser.xhtml" x="338" y="1714" id="pf13687505707017" referenceLink="//@navigationRule.0/@navigationCase.7/@toViewId|" inlinks="pf13687505707013" path="/removeUser.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="modifyUser.xhtml" x="338" y="2098" id="pf13687505707018" referenceLink="//@navigationRule.0/@navigationCase.8/@toViewId|" inlinks="pf13687505707014" path="/modifyUser.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="DetailBeans.xhtml" x="338" y="2482" id="pf13691692331161" referenceLink="//@navigationRule.0/@navigationCase.10/@toViewId|" inlinks="pf13691692331160" path="/detailProfil.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="online.xhtml" id="pf13692665727001" referenceLink="//@navigationRule.0/@navigationCase.11/@toViewId|" inlinks="pf13692665726990" path="/online.xhtml"/>
+  <links id="pf13682391843994" target="pf13682391843995" source="pf13682311983390" outcome="deny"/>
+  <links id="pf13683676311196" target="pf13682391843995" source="pf13682311983390" outcome="out"/>
+  <links id="pf13687505707010" target="pf13687505707015" source="pf13682311983390" outcome="admin"/>
+  <links id="pf13687505707011" target="pf13687505707015" source="pf13682311983390" outcome="done"/>
+  <links id="pf13687505707012" target="pf13687505707016" source="pf13682311983390" outcome="add"/>
+  <links id="pf13687505707013" target="pf13687505707017" source="pf13682311983390" outcome="remove"/>
+  <links id="pf13687505707014" target="pf13687505707018" source="pf13682311983390" outcome="modify"/>
+  <links id="pf13688045295503" target="pf13687075671481" source="pf13682311983390" outcome="access"/>
+  <links id="pf13688045295504" target="pf13687075671481" source="pf13682311983390" outcome="success"/>
+  <links id="pf13690799832340" target="pf13687075671481" source="pf13682311983390" outcome="delsuccess"/>
+  <links id="pf13691692331160" target="pf13691692331161" source="pf13682311983390" outcome="detail"/>
+  <links id="pf13692665726990" target="pf13692665727001" source="pf13682311983390" outcome="showOnline"/>
+</pageflow:Pageflow>

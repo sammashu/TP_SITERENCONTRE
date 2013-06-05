@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Photos">
+	<resultMap  id="resultMapPhotos" class="model.entities.Photos">
+		<result property="photoId" column="photos.photoid"/>
+		<result property="membreId" column="photos.membreId"/>
+		<result property="chemin" column="photos.chemin"/>
+		<result property="isprofil" column="photos.isprofil"/>
+	</resultMap>
+	
+	
+	<select id="getCheminById" resultClass="String" parameterClass="int">
+		SELECT chemin
+		FROM photos
+		WHERE membreId = #value#
+	</select>
+	
+	<update id="updateChemin" parameterClass="java.util.Map">
+		UPDATE photos
+		set chemin = #chemin#
+		WHERE membreId=#membreId#
+	</update>
+	
+</sqlMap>

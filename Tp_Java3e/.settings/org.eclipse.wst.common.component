@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="Tp_Java3e">
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <dependent-module archiveName="primefaces-3.5.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/Nemo/Documents/JAVA III/JAR/primefaces-3.5.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="java-output-path" value="/Tp_Java3e/build/classes"/>
+        <property name="context-root" value="Tp_Java3e"/>
+    </wb-module>
+</project-modules>
